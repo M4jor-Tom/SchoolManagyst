@@ -1,4 +1,5 @@
 package MainPackage;
+import MenuPackage.Menu;
 
 public class MainClass
 {
