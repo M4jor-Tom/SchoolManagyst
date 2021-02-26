@@ -41,4 +41,9 @@ public class Promotion
 		
 		return _toString;
 	}
+
+	public boolean isNull()
+	{
+		return _entitled == "" && _acronym == "";
+	}
 }
