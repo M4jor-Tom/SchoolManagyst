@@ -15,6 +15,13 @@ public class Promotion
 		_acronym = acronym;
 		_studients = new ArrayList<>();
 	}
+
+	public Promotion()
+	{
+		_entitled = "";
+		_acronym = "";
+		_studients = new ArrayList<>();
+	}
 	
 	public void addStudient(Studient studient)
 	{
