@@ -12,6 +12,7 @@ public class Logic implements LogicInterface
 	public Logic(DataInterface dataInterface)
 	{
 		_dataInterface = dataInterface;
+		_promotions = new ArrayList<>();
 	}
 	
 	public Promotion getPromotion(String acronym)
