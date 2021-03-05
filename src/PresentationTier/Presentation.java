@@ -78,7 +78,11 @@ public class Presentation
 					System.out.println("Aucune promotion n'existe, veuillez d'abord en créer.\n");
 					_scanner.next();
 				}
+				break;
 				
+			case 4:
+				for(int i = 0; i < _logicInterface.getPromotions().size(); i++)
+					System.out.println(_logicInterface.getPromotion(i));
 				break;
 			}
 		}
