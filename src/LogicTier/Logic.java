@@ -33,4 +33,9 @@ public class Logic implements LogicInterface
 	{
 		_promotions.add(promotion);
 	}
+	
+	public ArrayList<Promotion> getPromotions()
+	{
+		return _promotions;
+	}
 }

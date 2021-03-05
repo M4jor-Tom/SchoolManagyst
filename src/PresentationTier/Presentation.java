@@ -31,6 +31,8 @@ public class Presentation
 			switch(mainMenu.display("Mais... que faire ?\n"))
 			{
 			case 0:
+				for(int i = 0; i < _logicInterface.getPromotions().size(); i++)
+					System.out.println(_logicInterface.getPromotion(i).getAcronym());
 				break;
 				
 			case 1:
@@ -40,6 +42,14 @@ public class Presentation
 					System.out.println("Aucune promotion trouvée");
 				else
 					System.out.println(found);
+				break;
+				
+			case 2:
+				System.out.println("Nouvelle promotion: \nIntitulé: ");
+				String entitled = _scanner.next();
+				System.out.println("\nAcronyme: ");
+				String acronym = _scanner.next();
+				_logicInterface.addPromotion(new Promotion(entitled, acronym));
 				break;
 			}
 		}
