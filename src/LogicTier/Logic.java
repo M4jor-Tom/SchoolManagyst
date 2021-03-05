@@ -23,6 +23,11 @@ public class Logic implements LogicInterface
 		
 		return new Promotion();
 	}
+
+	public Promotion getPromotion(int index)
+	{
+		return _promotions.get(index);
+	}
 	
 	public void addPromotion(Promotion promotion)
 	{
