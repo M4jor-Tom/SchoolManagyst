@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import DataTier.DataInterface;
 import MainPackage.Promotion;
+import MainPackage.Studient;
 
 public class Logic implements LogicInterface
 {
@@ -37,5 +38,10 @@ public class Logic implements LogicInterface
 	public ArrayList<Promotion> getPromotions()
 	{
 		return _promotions;
+	}
+
+	public void addToPromotion(int promotionIndex, Studient toAdd)
+	{
+		_promotions.get(promotionIndex).addStudient(toAdd);
 	}
 }
