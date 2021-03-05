@@ -35,11 +35,11 @@ public class Promotion
 	
 	public String toString()
 	{
-		String _toString = "Promotion::\n{\n\tentitled = " + _entitled + "\n\tacronym = " + _acronym + "\n";
+		String _toString = "Promotion::\n{\n\tentitled = " + _entitled + "\n\tacronym = " + _acronym;
 		for(int i = 0; i < _studients.size(); i++)
-			_toString += _studients.get(i);
+			_toString += "\n\t" + _studients.get(i);
 		
-		return _toString;
+		return _toString + "\n}";
 	}
 
 	public boolean isNull()
