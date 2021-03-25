@@ -57,7 +57,27 @@ public class StudientDataAccessObject extends DataAccessObject<Studient>
 	@Override
 	public ArrayList<Studient> selectAll()
 	{
+		ArrayList<Studient> studients = null;
 		
-		return null;
+		Statement statement;
+		try
+		{
+			statement = getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM studients");
+			if(resultSet.first())
+			{
+				studients = new ArrayList<>();
+				do
+				{
+					studients.add(new Studient(resultSet.getString("studientFirstName"), resultSet.getString("studientLastName")));
+				}while(resultSet.next());
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return studients;
 	}
 }
