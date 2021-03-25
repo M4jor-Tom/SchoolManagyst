@@ -80,4 +80,31 @@ public class StudientDataAccessObject extends DataAccessObject<Studient>
 		
 		return studients;
 	}
+
+	public ArrayList<Studient> selectAll(long promotionId)
+	{
+		ArrayList<Studient> studients = null;
+		
+		PreparedStatement preparedStatement;
+		try
+		{
+			preparedStatement = getConnection().prepareStatement("SELECT * FROM studients WHERE studientPromotionId = ?");
+			preparedStatement.setLong(1, promotionId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.first())
+			{
+				studients = new ArrayList<>();
+				do
+				{
+					studients.add(new Studient(resultSet.getString("studientFirstName"), resultSet.getString("studientLastName")));
+				}while(resultSet.next());
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return studients;
+	}
 }
