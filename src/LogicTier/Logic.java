@@ -27,12 +27,12 @@ public class Logic implements LogicInterface
 
 	public Promotion getPromotion(int index)
 	{
-		return _promotions.get(index);
+		return getPromotions().get(index);
 	}
 	
 	public void addPromotion(Promotion promotion)
 	{
-		_promotions.add(promotion);
+		getPromotions().add(promotion);
 	}
 	
 	public ArrayList<Promotion> getPromotions()
@@ -47,7 +47,7 @@ public class Logic implements LogicInterface
 
 	public void addToPromotion(int promotionIndex, Studient toAdd)
 	{
-		_promotions.get(promotionIndex).addStudient(toAdd);
+		getPromotions().get(promotionIndex).addStudient(toAdd);
 	}
 
 	public DataInterface getDataInterface()
