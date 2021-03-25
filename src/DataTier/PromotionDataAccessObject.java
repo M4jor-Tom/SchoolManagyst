@@ -17,14 +17,14 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 	public void create(Promotion promotion) {
 		try
 		{	
-			PreparedStatement prepare = getConnection().prepareStatement(
+			PreparedStatement preparedStatement = getConnection().prepareStatement(
 				"INSERT INTO promotion (promotionEntitled, promotionAcronym) VALUES (?, ?)"
 			);
 			
-			prepare.setString(1, promotion.getEntitled());
-			prepare.setString(2, promotion.getAcronym());
-			prepare.executeUpdate();
-			prepare.close();
+			preparedStatement.setString(1, promotion.getEntitled());
+			preparedStatement.setString(2, promotion.getAcronym());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
 		}
 		catch(SQLException e)
 		{
