@@ -26,8 +26,7 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 			prepare.executeUpdate();
 			prepare.close();
 		}
-		catch
-		(SQLException e)
+		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
