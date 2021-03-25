@@ -8,6 +8,15 @@ public class Promotion
 		_entitled,
 		_acronym;
 	private ArrayList<Studient> _studients;
+
+	
+	public Promotion(String entitled, String acronym, ArrayList<Studient> studients)
+	{
+		setEntitled(entitled);
+		setAcronym(acronym);
+		setStudients(new ArrayList<>());
+		setStudients(studients);
+	}
 	
 	public Promotion(String entitled, String acronym)
 	{
