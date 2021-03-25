@@ -8,7 +8,6 @@ import MainPackage.Studient;
 public class Logic implements LogicInterface
 {
 	private DataInterface _dataInterface;
-	private ArrayList<Promotion> _promotions;
 	
 	public Logic(DataInterface dataInterface)
 	{
@@ -37,12 +36,12 @@ public class Logic implements LogicInterface
 	
 	public ArrayList<Promotion> getPromotions()
 	{
-		return _promotions;
+		return getDataInterface().getPromotions();
 	}
 	
 	public void setPromotions(ArrayList<Promotion> promotions)
 	{
-		_promotions = promotions;
+		getDataInterface().setPromotions(promotions);
 	}
 
 	public void addToPromotion(int promotionIndex, Studient toAdd)
