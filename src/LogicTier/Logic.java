@@ -18,9 +18,9 @@ public class Logic implements LogicInterface
 	
 	public Promotion getPromotion(String acronym)
 	{
-		for(int i = 0; i < _promotions.size(); i++)
-			if(_promotions.get(i).getAcronym() == acronym)
-				return _promotions.get(i);
+		for(int i = 0; i < getPromotions().size(); i++)
+			if(getPromotions().get(i).getAcronym() == acronym)
+				return getPromotions().get(i);
 		
 		return new Promotion();
 	}
