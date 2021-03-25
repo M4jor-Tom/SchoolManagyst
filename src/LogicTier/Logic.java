@@ -12,8 +12,8 @@ public class Logic implements LogicInterface
 	
 	public Logic(DataInterface dataInterface)
 	{
-		_dataInterface = dataInterface;
-		_promotions = new ArrayList<>();
+		setDataInterface(dataInterface);
+		setPromotions(new ArrayList<>());
 	}
 	
 	public Promotion getPromotion(String acronym)
@@ -39,9 +39,24 @@ public class Logic implements LogicInterface
 	{
 		return _promotions;
 	}
+	
+	public void setPromotions(ArrayList<Promotion> promotions)
+	{
+		_promotions = promotions;
+	}
 
 	public void addToPromotion(int promotionIndex, Studient toAdd)
 	{
 		_promotions.get(promotionIndex).addStudient(toAdd);
+	}
+
+	public DataInterface getDataInterface()
+	{
+		return _dataInterface;
+	}
+
+	public void setDataInterface(DataInterface dataInterface)
+	{
+		_dataInterface = dataInterface;
 	}
 }
