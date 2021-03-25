@@ -8,12 +8,38 @@ public class Studient
 	
 	public Studient(String firstName, String lastName)
 	{
-		_firstName = firstName;
-		_lastName = lastName;
+		setFirstName(firstName);
+		setLastName(lastName);
 	}
 	
+	public Studient()
+	{
+		setFirstName("");
+		setLastName("");
+	}
+
 	public String toString()
 	{
-		return "Studient::{firstName = " + _firstName + ",lastName = " + _lastName + "}";
+		return "Studient::{firstName = " + getFirstName() + ",lastName = " + getLastName() + "}";
+	}
+	
+	public String getFirstName()
+	{
+		return _firstName;
+	}
+	
+	public void setFirstName(String firstName)
+	{
+		_firstName = firstName;
+	}
+	
+	public String getLastName()
+	{
+		return _lastName;
+	}
+	
+	public void setLastName(String lastName)
+	{
+		_lastName = lastName;
 	}
 }

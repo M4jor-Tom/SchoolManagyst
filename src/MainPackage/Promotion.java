@@ -11,16 +11,16 @@ public class Promotion
 	
 	public Promotion(String entitled, String acronym)
 	{
-		_entitled = entitled;
-		_acronym = acronym;
-		_studients = new ArrayList<>();
+		setEntitled(entitled);
+		setAcronym(acronym);
+		setStudients(new ArrayList<>());
 	}
 
 	public Promotion()
 	{
-		_entitled = "";
-		_acronym = "";
-		_studients = new ArrayList<>();
+		setEntitled("");
+		setAcronym("");
+		setStudients(new ArrayList<>());
 	}
 	
 	public void addStudient(Studient studient)
@@ -28,16 +28,11 @@ public class Promotion
 		_studients.add(studient);
 	}
 	
-	public String getAcronym()
-	{
-		return _acronym;
-	}
-	
 	public String toString()
 	{
-		String _toString = "Promotion::\n{\n\tentitled = " + _entitled + "\n\tacronym = " + _acronym;
+		String _toString = "Promotion::\n{\n\tentitled = " + getEntitled() + "\n\tacronym = " + getAcronym();
 		for(int i = 0; i < _studients.size(); i++)
-			_toString += "\n\t" + _studients.get(i);
+			_toString += "\n\t" + getStudients().get(i);
 		
 		return _toString + "\n}";
 	}
@@ -45,5 +40,35 @@ public class Promotion
 	public boolean isNull()
 	{
 		return _entitled == "" && _acronym == "";
+	}
+
+	public String getEntitled()
+	{
+		return _entitled;
+	}
+	
+	public void setEntitled(String entitled)
+	{
+		_entitled = entitled;
+	}
+	
+	public String getAcronym()
+	{
+		return _acronym;
+	}
+	
+	public void setAcronym(String acronym)
+	{
+		_acronym = acronym;
+	}
+	
+	public ArrayList<Studient> getStudients()
+	{
+		return _studients;
+	}
+	
+	public void setStudients(ArrayList<Studient> studients)
+	{
+		_studients = studients;
 	}
 }
