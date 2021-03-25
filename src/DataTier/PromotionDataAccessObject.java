@@ -1,10 +1,13 @@
 package DataTier;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import MainPackage.Promotion;
+import MainPackage.Studient;
 
 public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 {
@@ -58,8 +61,32 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 	@Override
 	public ArrayList<Promotion> selectAll()
 	{
+		ArrayList<Promotion> promotions = null;
 		
-		return null;
+		Statement statement;
+		try
+		{
+			statement = getConnection().createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM promotions");
+			if(resultSet.first())
+			{
+				promotions = new ArrayList<>();
+				do
+				{
+					promotions.add(new Promotion(
+							resultSet.getString("promotionEntitled"),
+							resultSet.getString("promotionAcronym"),
+							getStudientDao().selectAll(resultSet.getLong("promotionId"))
+						));
+				}while(resultSet.next());
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return promotions;
 	}
 	
 	public StudientDataAccessObject getStudientDao()
