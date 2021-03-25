@@ -9,7 +9,11 @@ public class MainClass
 {
 	public static void main(String[] args)
 	{
-		DataInterface data = new Data();
+		StudientDataAccessObject studientDao = new StudientDataAccessObject();
+		PromotionDataAccessObject promotionDao = new PromotionDataAccessObject(studientDao);
+		
+		DataInterface data = new Data(promotionDao);
+		
 		LogicInterface logic = new Logic(data);
 		Presentation presentation = new Presentation(logic);
 		
