@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import MainPackage.Promotion;
 
 public class PromotionDataAccessObject extends DataAccessObject<Promotion>
-{	
+{
+	StudientDataAccessObject _studientDao;
+	
 	public PromotionDataAccessObject(StudientDataAccessObject studientDao)
 	{
 		super();
-		
+		setStudientDao(studientDao);
 	}
 
 	public void create(Promotion promotion) {
@@ -58,5 +60,15 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 	{
 		
 		return null;
+	}
+	
+	public StudientDataAccessObject getStudientDao()
+	{
+		return _studientDao;
+	}
+
+	public void setStudientDao(StudientDataAccessObject studientDao)
+	{
+		_studientDao = studientDao;
 	}
 }
