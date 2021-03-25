@@ -14,6 +14,9 @@ public class Data implements DataInterface
 	{
 		setPromotions(new ArrayList<>());
 		setStudients(new ArrayList<>());
+		
+		setPromotions(promotionDao.selectAll());
+		setStudients(promotionDao.getStudientDao().selectAll());
 	}
 	
 	public ArrayList<Promotion> getPromotions()
