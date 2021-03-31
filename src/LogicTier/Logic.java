@@ -15,7 +15,6 @@ public class Logic extends UnicastRemoteObject implements LogicInterface
 	public Logic(DataInterface dataInterface) throws RemoteException
 	{
 		setDataInterface(dataInterface);
-		setPromotions(new ArrayList<>());
 	}
 	
 	public Promotion getPromotion(String acronym)
