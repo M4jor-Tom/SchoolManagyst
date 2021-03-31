@@ -20,10 +20,10 @@ public class MainClass
 		
 		try
 		{
-			LocateRegistry.createRegistry(8888);
+			LocateRegistry.createRegistry(1099);
 			LogicInterface logic = new Logic(data);
 
-			Naming.rebind("rmi://localhost/8888/logic", logic);
+			Naming.rebind("rmi://localhost/1099/logic", logic);
 			
 			Presentation presentation = new Presentation(logic);
 			
