@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import MainPackage.Promotion;
-import MainPackage.Studient;
 
 public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 {
@@ -19,11 +18,12 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 		setStudientDao(studientDao);
 	}
 
-	public void create(Promotion promotion) {
+	public void create(Promotion promotion)
+	{
 		try
 		{	
 			PreparedStatement preparedStatement = getConnection().prepareStatement(
-				"INSERT INTO promotion (promotionEntitled, promotionAcronym) VALUES (?, ?)"
+				"INSERT INTO promotions (promotionEntitled, promotionAcronym) VALUES (?, ?)"
 			);
 			
 			preparedStatement.setString(1, promotion.getEntitled());
@@ -36,26 +36,87 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void truncate()
+	{
+		try
+		{
+			Statement statement = getConnection().createStatement();
+			
+			getStudientDao().truncate();
+			statement.executeUpdate("DELETE FROM promotions WHERE 1");//TRUNCATE TABLE promotions");
+			
+			statement.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void delete(Promotion object)
 	{
-		
-		
+		try
+		{
+			PreparedStatement preparedStatement = getConnection().prepareStatement("DELETE FROM promotions WHERE promotionId = ?");
+			preparedStatement.setLong(1, object.getId());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void update(Promotion object)
 	{
-		
-		
+		try
+		{
+			PreparedStatement preparedStatement = getConnection().prepareStatement(
+				"UPDATE promotions SET promotionEntitled = ?, promotionAcronym = ? WHERE promotionId = ?"
+			);
+			preparedStatement.setString(1, object.getEntitled());
+			preparedStatement.setString(2, object.getAcronym());
+			preparedStatement.setLong(3, object.getId());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Promotion select(Long id)
 	{
-		
-		return null;
+		Promotion promotion = null;
+		try
+		{
+			PreparedStatement preparedStatement = getConnection().prepareStatement(
+				"SELECT * FROM promotions WHERE promotionId = ?"
+			);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement.close();
+			
+			//Reading only result
+			if(resultSet.next())
+				promotion = new Promotion(
+					resultSet.getString("promotionEntitled"),
+					resultSet.getString("promotionAcronym"),
+					getStudientDao().selectAll(resultSet.getLong("promotionId"))
+				);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return promotion;
 	}
 
 	@Override

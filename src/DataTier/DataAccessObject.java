@@ -22,6 +22,7 @@ abstract public class DataAccessObject<SqlEntity>
 		_connection = connection;
 	}
 
+	abstract public void truncate();
 	abstract public void delete(SqlEntity object);
 	abstract public void update(SqlEntity object);
 	abstract public SqlEntity select(Long id);

@@ -7,35 +7,47 @@ import MainPackage.Studient;
 
 public class Data implements DataInterface
 {
-	ArrayList<Promotion> _promotions;
-	ArrayList<Studient> _studients;
+	PromotionDataAccessObject _promotionDao;
 	
 	public Data(PromotionDataAccessObject promotionDao)
 	{
-		setPromotions(new ArrayList<>());
-		setStudients(new ArrayList<>());
-		
-		setPromotions(promotionDao.selectAll());
-		setStudients(promotionDao.getStudientDao().selectAll());
+		setPromotionDao(promotionDao);
+	}
+
+	public void addPromotion(Promotion promotion)
+	{
+		getPromotionDao().create(promotion);
+	}
+
+	public void addToPromotion(long promotionId, Studient toAdd)
+	{
+		getPromotionDao().getStudientDao().create(toAdd, promotionId);
 	}
 	
 	public ArrayList<Promotion> getPromotions()
 	{
-		return _promotions;
+		return getPromotionDao().selectAll();
 	}
 	
 	public void setPromotions(ArrayList<Promotion> promotions)
 	{
-		_promotions = promotions;
+		getPromotionDao().truncate();
+		for(Promotion promotion: promotions)
+			getPromotionDao().create(promotion);
 	}
 	
 	public ArrayList<Studient> getStudients()
 	{
-		return _studients;
+		return getPromotionDao().getStudientDao().selectAll();
 	}
 	
-	public void setStudients(ArrayList<Studient> studients)
+	private PromotionDataAccessObject getPromotionDao()
 	{
-		_studients = studients;
+		return _promotionDao;
+	}
+	
+	private void setPromotionDao(PromotionDataAccessObject promotionDao)
+	{
+		_promotionDao = promotionDao;
 	}
 }
