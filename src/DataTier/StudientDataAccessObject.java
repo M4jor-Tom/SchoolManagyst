@@ -111,19 +111,15 @@ public class StudientDataAccessObject extends DataAccessObject<Studient>
 	{
 		ArrayList<Studient> studients = null;
 		
-		Statement statement;
 		try
 		{
-			statement = getConnection().createStatement();
+			Statement statement = getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM studients");
 			statement.close();
-			if(resultSet.first())
+			studients = new ArrayList<>();
+			while(resultSet.next())
 			{
-				studients = new ArrayList<>();
-				do
-				{
-					studients.add(new Studient(resultSet.getString("studientFirstName"), resultSet.getString("studientLastName")));
-				}while(resultSet.next());
+				studients.add(new Studient(resultSet.getString("studientFirstName"), resultSet.getString("studientLastName")));
 			}
 		}
 		catch(SQLException e)

@@ -124,22 +124,18 @@ public class PromotionDataAccessObject extends DataAccessObject<Promotion>
 	{
 		ArrayList<Promotion> promotions = null;
 		
-		Statement statement;
 		try
 		{
-			statement = getConnection().createStatement();
+			Statement statement = getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM promotions");
-			if(resultSet.first())
+			promotions = new ArrayList<>();
+			while(resultSet.next())
 			{
-				promotions = new ArrayList<>();
-				do
-				{
-					promotions.add(new Promotion(
-							resultSet.getString("promotionEntitled"),
-							resultSet.getString("promotionAcronym"),
-							getStudientDao().selectAll(resultSet.getLong("promotionId"))
-						));
-				}while(resultSet.next());
+				promotions.add(new Promotion(
+						resultSet.getString("promotionEntitled"),
+						resultSet.getString("promotionAcronym"),
+						getStudientDao().selectAll(resultSet.getLong("promotionId"))
+					));
 			}
 		}
 		catch(SQLException e)
