@@ -1,8 +1,12 @@
 package MainPackage;
 
 //3-Tier Implementation
+import java.rmi.registry.*;
 import PresentationTier.*;
 import LogicTier.*;
+
+import java.rmi.Naming;
+
 import DataTier.*;
 
 public class MainClass
@@ -14,9 +18,21 @@ public class MainClass
 		
 		DataInterface data = new Data(promotionDao);
 		
-		LogicInterface logic = new Logic(data);
-		Presentation presentation = new Presentation(logic);
-		
-		presentation.menu();
+		try
+		{
+			LocateRegistry.createRegistry(8888);
+			LogicInterface logic = new Logic(data);
+
+			Naming.rebind("rmi://localhost/8888/logic", logic);
+			
+			Presentation presentation = new Presentation(logic);
+			
+			presentation.menu();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

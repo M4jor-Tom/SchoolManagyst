@@ -1,15 +1,18 @@
 package LogicTier;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import DataTier.DataInterface;
 import MainPackage.Promotion;
 import MainPackage.Studient;
 
-public class Logic implements LogicInterface
+public class Logic extends UnicastRemoteObject implements LogicInterface
 {
+	private static final long serialVersionUID = 3539898641029169426L;
 	private DataInterface _dataInterface;
 	
-	public Logic(DataInterface dataInterface)
+	public Logic(DataInterface dataInterface) throws RemoteException
 	{
 		setDataInterface(dataInterface);
 		setPromotions(new ArrayList<>());
