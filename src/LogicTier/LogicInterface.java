@@ -16,5 +16,5 @@ public interface LogicInterface extends Remote
 
 	public ArrayList<Promotion> getPromotions() throws RemoteException;
 	
-	public void addToPromotion(int promotionIndex, Studient toAdd) throws RemoteException;
+	public void addToPromotion(long promotionId, Studient toAdd) throws RemoteException;
 }

@@ -14,8 +14,8 @@ public class Presentation
 	
 	public Presentation(LogicInterface logicInterface)
 	{
-		_logicInterface = logicInterface;
-		_scanner = new Scanner(System.in);
+		setLogicInterface(logicInterface);
+		setScanner(new Scanner(System.in));
 	}
 	
 	public void menu()
@@ -34,13 +34,13 @@ public class Presentation
 				switch(mainMenu.display("Mais... que faire ?\n"))
 				{
 				case 0:
-					for(int i = 0; i < _logicInterface.getPromotions().size(); i++)
-						System.out.println(_logicInterface.getPromotion(i).getAcronym());
+					for(int i = 0; i < getLogicInterface().getPromotions().size(); i++)
+						System.out.println(getLogicInterface().getPromotion(i).getAcronym());
 					break;
 					
 				case 1:
 					System.out.print("Acronyme: ");
-					Promotion found = _logicInterface.getPromotion(_scanner.next());
+					Promotion found = getLogicInterface().getPromotion(_scanner.next());
 					if(found.isNull())
 						System.out.println("Aucune promotion trouvée");
 					else
@@ -49,42 +49,46 @@ public class Presentation
 					
 				case 2:
 					System.out.println("Nouvelle promotion: \nIntitulé: ");
-					String entitled = _scanner.next();
+					String entitled = getScanner().next();
 					System.out.println("\nAcronyme: ");
-					String acronym = _scanner.next();
-					_logicInterface.addPromotion(new Promotion(entitled, acronym));
+					String acronym = getScanner().next();
+					getLogicInterface().addPromotion(new Promotion(entitled, acronym));
 					break;
 				
 				case 3:
-					if(_logicInterface.getPromotions().size() > 0)
+					if(getLogicInterface().getPromotions().size() > 0)
 					{
 						//Student grabbing part
 						System.out.println("Créer un élève\nPrénom: ");
-						String firstName = _scanner.next();
+						String firstName = getScanner().next();
 						System.out.println("Nom: ");
-						String lastName = _scanner.next();
+						String lastName = getScanner().next();
 						
 						//Promotion menu part 
 						Menu promotionsMenu = new Menu();
-						for(int i = 0; i < _logicInterface.getPromotions().size(); i++)
-							promotionsMenu.addChoice(_logicInterface.getPromotion(i).getAcronym());
+						for(int i = 0; i < getLogicInterface().getPromotions().size(); i++)
+							promotionsMenu.addChoice(getLogicInterface().getPromotion(i).getAcronym());
 						
 						//User selection of a promotion part
 						Studient toAdd = new Studient(firstName, lastName);
 						int promotionIndex = promotionsMenu.display("Choisissez une promotion où inscrire " + toAdd);
+						long promotionId = getLogicInterface().getPromotion(promotionIndex).getId();
 						
-						_logicInterface.addToPromotion(promotionIndex, toAdd);
+						for(Promotion promotion: getLogicInterface().getPromotions())
+							System.out.println("Promotion: " + promotion + " promotionIndex = " + promotionIndex);
+						
+						getLogicInterface().addToPromotion(promotionId, toAdd);
 					}
 					else
 					{
 						System.out.println("Aucune promotion n'existe, veuillez d'abord en créer.\n");
-						_scanner.next();
+						getScanner().next();
 					}
 					break;
 					
 				case 4:
-					for(int i = 0; i < _logicInterface.getPromotions().size(); i++)
-						System.out.println(_logicInterface.getPromotion(i));
+					for(int i = 0; i < getLogicInterface().getPromotions().size(); i++)
+						System.out.println(getLogicInterface().getPromotion(i));
 					break;
 				}
 			}
@@ -93,5 +97,25 @@ public class Presentation
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public LogicInterface getLogicInterface()
+	{
+		return _logicInterface;
+	}
+	
+	public void setLogicInterface(LogicInterface logicInterface)
+	{
+		_logicInterface = logicInterface;
+	}
+	
+	public Scanner getScanner()
+	{
+		return _scanner;
+	}
+	
+	public void setScanner(Scanner scanner)
+	{
+		_scanner = scanner;
 	}
 }

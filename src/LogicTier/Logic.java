@@ -46,9 +46,9 @@ public class Logic extends UnicastRemoteObject implements LogicInterface
 		getDataInterface().setPromotions(promotions);
 	}
 
-	public void addToPromotion(int promotionIndex, Studient toAdd)
+	public void addToPromotion(long promotionId, Studient toAdd)
 	{
-		getPromotions().get(promotionIndex).addStudient(toAdd);
+		getDataInterface().addToPromotion(promotionId, toAdd);
 	}
 
 	public DataInterface getDataInterface()
