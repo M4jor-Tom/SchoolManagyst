@@ -33,7 +33,7 @@ public class Logic extends UnicastRemoteObject implements LogicInterface
 	
 	public void addPromotion(Promotion promotion)
 	{
-		getPromotions().add(promotion);
+		getDataInterface().addPromotion(promotion);
 	}
 	
 	public ArrayList<Promotion> getPromotions()
