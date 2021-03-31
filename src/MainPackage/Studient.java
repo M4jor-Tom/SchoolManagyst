@@ -2,6 +2,7 @@ package MainPackage;
 
 public class Studient
 {
+	private long _id;
 	private String
 		_firstName,
 		_lastName;
@@ -23,6 +24,16 @@ public class Studient
 		return "Studient::{firstName = " + getFirstName() + ",lastName = " + getLastName() + "}";
 	}
 	
+	public long getId()
+	{
+		return _id;
+	}
+
+	public void setId(long id)
+	{
+		_id = id;
+	}
+
 	public String getFirstName()
 	{
 		return _firstName;
